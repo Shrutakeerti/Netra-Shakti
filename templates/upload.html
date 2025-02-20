@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Eye Images</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h2>Upload Eye Images for Disease Prediction</h2>
+    <form
+      action="{{ url_for('upload') }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label>Inner Eye Disease Image:</label>
+      <input type="file" name="inner_eye" accept="image/*" />
+      <br />
+      <label>Outer Eye Disease Image:</label>
+      <input type="file" name="outer_eye" accept="image/*" />
+      <br />
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>
