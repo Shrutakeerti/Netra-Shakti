@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction Result</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h2>Prediction Results</h2>
+    <h2>Diagnosis Result:</h2>
+    {% if predictions %}
+    <p>The detected disease is: <strong>{{ predictions }}</strong></p>
+    {% else %}
+    <p>No disease detected.</p>
+    {% endif %}
+
+    <p>
+      {{ predictions.get("inner_eye_disease", "No Inner Eye Image Uploaded") }}
+    </p>
+    <p>
+      {{ predictions.get("outer_eye_disease", "No Outer Eye Image Uploaded") }}
+    </p>
+    <a href="{{ url_for('thank_you') }}">Proceed</a>
+  </body>
+</html>
