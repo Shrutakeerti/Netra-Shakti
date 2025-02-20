@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eye Disease Chatbot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .chat-container {
+        width: 50%;
+        margin: auto;
+        border: 1px solid black;
+        padding: 10px;
+      }
+      .chat-box {
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      input {
+        width: 80%;
+        padding: 5px;
+      }
+      button {
+        padding: 5px 10px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Eye Disease Chatbot</h2>
+    <div class="chat-container">
+      <div class="chat-box" id="chat-box">
+        <p><strong>Bot:</strong> Hello! Ask me about eye diseases.</p>
+      </div>
+      <input type="text" id="user-input" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+      function sendMessage() {
+        let userMessage = document.getElementById("user-input").value;
+        if (!userMessage.trim()) return;
+
+        let chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+
+        fetch("/chatbot", {
+          method: "POST",
+          body: JSON.stringify({ message: userMessage }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+            document.getElementById("user-input").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+          });
+      }
+    </script>
+  </body>
+</html>
