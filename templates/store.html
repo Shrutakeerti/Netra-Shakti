@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registered Users</title>
+  </head>
+  <body>
+    <h2>Registered Users</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Gender</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.gender }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <style>
+      .upload-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
+
+    <a href="{{ url_for('upload') }}" class="upload-btn">Go to Upload Page</a>
+    <a href="{{ url_for('chatbot') }}">
+      <button>Chat with Eye Disease Bot</button>
+    </a>
+  </body>
+</html>
