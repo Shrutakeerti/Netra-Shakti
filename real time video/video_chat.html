@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask WebRTC Video Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Netra Sanchalaya</h1>
+    <input type="text" id="room" placeholder="Enter Room ID" />
+    <input type="text" id="username" placeholder="Enter Username" />
+    <button onclick="joinRoom()">Join</button>
+
+    <h3>Chat</h3>
+    <div id="chat"></div>
+    <input type="text" id="message" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+
+    <h3>Video Call</h3>
+    <video id="localVideo" autoplay playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+
+    <button onclick="startCall()">Start Call</button>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
