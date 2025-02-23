@@ -1,0 +1,380 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Eye Images</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h2>Upload Eye Images for Disease Prediction</h2>
+    <form
+      action="{{ url_for('upload') }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label>Inner Eye Disease Image:</label>
+      <input type="file" name="inner_eye" accept="image/*" />
+      <br />
+      <label>Outer Eye Disease Image:</label>
+      <input type="file" name="outer_eye" accept="image/*" />
+      <br />
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Eye Images</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inconsolata:wght@200..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:wght@686&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Phudu:wght@300..900&family=Playwrite+IT+Moderna:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Signika:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      /* General Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #e8edf1, #cfe5f7);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Main Layout */
+      .main-container {
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        max-width: 900px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Left Section - Upload Box */
+      .upload-container {
+        flex: 1;
+        text-align: center;
+        margin: 20px;
+      }
+
+      /* Upload Box Styling */
+      .upload-box {
+        background: linear-gradient(to top, #dbe5ed, #bddff9);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        width: 80%;
+        margin: 0 auto;
+        transition: 0.3s;
+      }
+
+      /* Upload Icon */
+      .upload-icon {
+        width: 50px;
+        margin-bottom: 10px;
+        /* filter: brightness(0) invert(1); */
+      }
+
+      /* Upload Content */
+      .upload-box label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+      }
+
+      .upload-box img {
+        width: 150px;
+        margin-bottom: 10px;
+      }
+
+      .upload-box p {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px 0;
+        color: white;
+      }
+
+      .upload-container h2 {
+        font-family: "Atkinson Hyperlegible Mono", serif;
+        text-transform: uppercase;
+      }
+      .upload-box span {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Drag-and-Drop Box */
+      .upload-box label {
+        display: block;
+        padding: 15px;
+        border: 2px dashed rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+
+      .drag-box {
+        background: #e1f5fe;
+        padding: 12px;
+        border: 2px dashed rgba(33, 150, 243, 0.7);
+        border-radius: 10px;
+        font-size: 16px;
+        color: #0d47a1;
+        font-weight: bold;
+      }
+
+      /* Hover Effect */
+      /* .upload-box:hover {
+            background: linear-gradient(to top, #6ab7f5, #418bd5);
+        } */
+
+      /* Hide default file input */
+      #file-upload {
+        display: none;
+      }
+
+      /* Upload Button */
+      #upload-btn {
+        background: linear-gradient(to right, #42a5f5, #1e88e5);
+        border: none;
+        padding: 12px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 15px;
+        width: 100%;
+        transition: 0.3s;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      #upload-btn:hover {
+        background: linear-gradient(135deg, #1e88e5, #1565c0);
+        transform: scale(1.05);
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      #upload-btn:disabled {
+        background: #b0bec5;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      /* Right Section - Selection Buttons */
+      .selection-container {
+        flex: 1;
+        text-align: center;
+        background: linear-gradient(to bottom, #f3faff, #e1f5fe);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .selection-container h2 {
+        color: #0d47a1;
+        margin-bottom: 15px;
+        font-size: 22px;
+      }
+
+      .selection-box {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .select-btn {
+        background: linear-gradient(to right, #64b5f6, #42a5f5);
+        border: none;
+        padding: 12px;
+        color: white;
+        font-size: 16px;
+        width: 80%;
+        border-radius: 10px;
+        margin: 10px 0;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-weight: bold;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .eye-option.active {
+        background: linear-gradient(to right, #3895b7, #87c0d1);
+        box-shadow: 0px 0px 10px rgba(33, 150, 243, 0.8);
+      }
+
+      .eye-option:hover {
+        background: #c5d5ed;
+      }
+
+      /* Icons */
+      .btn-icon {
+        width: 20px;
+        filter: brightness(0) invert(1);
+      }
+      .eye-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #e3f2fd; /* Light sky-blue background */
+        border-radius: 12px;
+        padding: 12px;
+        width: 85%;
+        border: 2px solid #64b5f6;
+        transition: 0.3s;
+        cursor: pointer;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* Left section with image */
+      .eye-option img {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid #64b5f6;
+      }
+
+      .eye-option div {
+        flex: 1;
+        text-align: left;
+        padding-left: 10px;
+      }
+      /* Right section button */
+      .eye-option span {
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #1976d2;
+      }
+      .eye-option p {
+        font-size: 14px;
+        color: #555;
+        margin: 3px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Left Section: Upload Box -->
+      <div class="upload-container">
+        <h2>Upload Eye Images</h2>
+        <form
+          action="{{ url_for('upload') }}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="upload-box">
+            <label for="file-upload">
+              <img src="img.png" alt="Upload Icon" class="upload-icon" />
+              <div class="drag-box">Drag files here or browse</div>
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              name="eye_image"
+              accept="image/*"
+            />
+          </div>
+          <input type="hidden" id="eye-type" name="" />
+
+          <button type="submit" id="upload-btn" disabled>Upload</button>
+        </form>
+      </div>
+
+      <!-- Right Section: Selection Box -->
+      <div class="selection-container">
+        <h2>Select Eye Type</h2>
+        <div class="selection-box">
+          <div
+            class="eye-option select-btn"
+            id="inner-eye"
+            data-name="inner_eye"
+          >
+            <img
+              src="https://media.istockphoto.com/id/1308485052/photo/structure-of-human-eye.jpg?s=612x612&w=0&k=20&c=rapEDWHG4od0roXmcKs62w4t0n8-7nE007PoEeo5wz4="
+              alt="Inner Eye"
+            />
+            <div class="opt-content">
+              <span>Inner Eye</span>
+              <p>Upload images of the inner eye for analysis.</p>
+            </div>
+          </div>
+          <div class="eye-option" id="outer-eye" data-name="outer_eye">
+            <img
+              src="https://www.lei.org.au/wp-content/uploads/2021/08/the-external-eye.png"
+              alt="Eye Icon"
+            />
+            <div class="opt-content">
+              <span>Outer Eye</span>
+              <p>Upload images of the outer eye for detection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedType = "";
+      const uploadBtn = document.getElementById("upload-btn");
+      const fileInput = document.getElementById("file-upload");
+      const eyeTypeInput = document.getElementById("eye-type");
+
+      document.querySelectorAll(".eye-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          document
+            .querySelectorAll(".eye-option")
+            .forEach((opt) => opt.classList.remove("active"));
+          this.classList.add("active");
+
+          selectedType = this.getAttribute("data-name");
+          eyeTypeInput.setAttribute("name", selectedType);
+          uploadBtn.disabled = false; // Enable upload button
+        });
+      });
+
+      fileInput.addEventListener("change", function () {
+        if (!selectedType) {
+          alert("Please select Inner Eye or Outer Eye before uploading!");
+          this.value = ""; // Clear the file input
+        }
+      });
+    </script>
+  </body>
+</html>
