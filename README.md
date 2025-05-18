@@ -1,7 +1,12 @@
-# Eye Disease Prediction System
+# THE EYE HUB YOU WOULD NOT WANT TO MISS
+
+![First Img](https://github.com/Shrutakeerti/Netra-Shakti/blob/main/WhatsApp%20Image%202025-05-18%20at%201.19.33%20PM.jpeg)
+![2nd Img](https://github.com/Shrutakeerti/Netra-Shakti/blob/main/WhatsApp%20Image%202025-05-18%20at%201.19.45%20PM.jpeg)
+
+
 
 ## 📌 Overview
-The **Eye Disease Prediction System** is a web-based platform designed to help users detect potential eye diseases using AI-driven image analysis. The system allows users to upload their **inner and outer eye images**, which are then analyzed by a **machine learning model** to predict the presence and type of eye disease.
+The **NETRA SHAKTI** is a web-based platform designed to help users detect potential eye diseases using AI-driven image analysis. The system allows users to upload their **inner and outer eye images**, which are then analyzed by a **machine learning model** to predict the presence and type of eye disease.
 
 Additionally, the platform provides a **chatbot** for answering eye disease-related queries and offers the capability to **connect with real-time doctors via video consultation**. Future enhancements will include **recommendations for doctors and hospitals** based on the diagnosed condition.
 
