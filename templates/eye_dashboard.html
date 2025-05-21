@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eye Diseases Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #e1f5fe, #b3e5fc);
+        color: #01579b;
+      }
+
+      .navbar {
+        background-color: #0288d1;
+      }
+
+      .navbar-brand {
+        color: #ffffff !important;
+        font-weight: bold;
+      }
+
+      .hero-section {
+        padding: 60px 0;
+        background: linear-gradient(to right, #0288d1, #4fc3f7);
+        text-align: center;
+        color: white;
+      }
+
+      .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+      }
+
+      .hero-section p {
+        font-size: 1.3rem;
+        margin-top: 15px;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        background: #ffffff;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+      }
+
+      .card-title {
+        color: #0277bd;
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+
+      .btn-custom {
+        background-color: #039be5;
+        color: white;
+        border-radius: 8px;
+      }
+
+      .btn-custom:hover {
+        background-color: #0277bd;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #0288d1;
+        color: white;
+        margin-top: 40px;
+      }
+
+      canvas {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero-section">
+      <h1>Eye Diseases Dashboard</h1>
+      <p>Visualize and understand common eye conditions</p>
+    </section>
+
+    <div class="container">
+      <div class="dashboard">
+        <div class="card p-4">
+          <h5 class="card-title">Cataracts</h5>
+          <p class="card-text">
+            Cataracts cloud the eye lens and reduce vision clarity.
+          </p>
+          <canvas id="cataractsChart"></canvas>
+          <button class="btn btn-custom mt-3" onclick="alert('Cataracts are caused by protein build-up on the lens.')">Learn More</button>
+        </div>
+
+        <div class="card p-4">
+          <h5 class="card-title">Glaucoma</h5>
+          <p class="card-text">
+            A group of diseases damaging the optic nerve, leading to vision loss.
+          </p>
+          <canvas id="glaucomaChart"></canvas>
+          <button class="btn btn-custom mt-3" onclick="alert('Glaucoma is often linked to increased pressure in the eye.')">Learn More</button>
+        </div>
+
+        <div class="card p-4">
+          <h5 class="card-title">Macular Degeneration</h5>
+          <p class="card-text">
+            Central retina damage affecting detailed vision.
+          </p>
+          <canvas id="amdChart"></canvas>
+          <button class="btn btn-custom mt-3" onclick="alert('Macular Degeneration primarily affects older adults.')">Learn More</button>
+        </div>
+
+        <div class="card p-4">
+          <h5 class="card-title">Diabetic Retinopathy</h5>
+          <p class="card-text">
+            Diabetes-related retinal damage which may cause blindness.
+          </p>
+          <canvas id="retinopathyChart"></canvas>
+          <button class="btn btn-custom mt-3" onclick="alert('Diabetic Retinopathy is caused by damage to the blood vessels of the retina.')">Learn More</button>
+        </div>
+
+        <div class="card p-4">
+          <h5 class="card-title">Conjunctivitis</h5>
+          <p class="card-text">
+            Also known as pink eye; inflammation of the outer eye membrane.
+          </p>
+          <canvas id="conjunctivitisChart"></canvas>
+          <button class="btn btn-custom mt-3" onclick="alert('Conjunctivitis can be caused by allergies, bacteria, or viruses.')">Learn More</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 Eye Health Analytics | All Rights Reserved
+    </footer>
+
+    <script>
+      const cataractsChart = new Chart(document.getElementById("cataractsChart"), {
+        type: "line",
+        data: {
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          datasets: [{
+            label: "Cataracts Cases",
+            data: [12000, 15000, 17000, 20000, 22000],
+            borderColor: "#039be5",
+            backgroundColor: "rgba(3, 155, 229, 0.1)",
+            tension: 0.3,
+          }],
+        },
+      });
+
+      const glaucomaChart = new Chart(document.getElementById("glaucomaChart"), {
+        type: "bar",
+        data: {
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          datasets: [{
+            label: "Glaucoma Cases",
+            data: [8000, 9000, 9500, 10000, 12000],
+            backgroundColor: "#0277bd",
+          }],
+        },
+      });
+
+      const amdChart = new Chart(document.getElementById("amdChart"), {
+        type: "pie",
+        data: {
+          labels: ["Dry AMD", "Wet AMD"],
+          datasets: [{
+            data: [70, 30],
+            backgroundColor: ["#4fc3f7", "#0288d1"],
+          }],
+        },
+      });
+
+      const retinopathyChart = new Chart(document.getElementById("retinopathyChart"), {
+        type: "line",
+        data: {
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          datasets: [{
+            label: "Diabetic Retinopathy Cases",
+            data: [5000, 6000, 7000, 8500, 9500],
+            borderColor: "#01579b",
+            backgroundColor: "rgba(1, 87, 155, 0.1)",
+            tension: 0.3,
+          }],
+        },
+      });
+
+      const conjunctivitisChart = new Chart(document.getElementById("conjunctivitisChart"), {
+        type: "bar",
+        data: {
+          labels: ["2020", "2021", "2022", "2023", "2024"],
+          datasets: [{
+            label: "Conjunctivitis Cases",
+            data: [10000, 11000, 11500, 13000, 14000],
+            backgroundColor: "#4fc3f7",
+          }],
+        },
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
